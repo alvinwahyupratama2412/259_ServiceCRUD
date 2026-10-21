@@ -16,3 +16,18 @@ const pool = new Pool({
     password: 'admin123',
     port: 5432,
 })
+
+// GET all mahasiswa
+app.get('/', (req, res) => {
+    console.log("TES DATA : ");
+
+    pool.query('SELECT * FROM biodata ORDER BY id')
+    .then(result => {
+        res.send(result.rows)
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    });
+
+})
